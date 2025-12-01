@@ -9,8 +9,20 @@
  *    888 .  888      888   888  888   888  888    .o o.  )88b  888 `88b.
  *    "888" d888b     `V88V"V8P' `Y8bod88P" `Y8bod8P' 8""888P' o888o o888o
  *  ========================================================================
- *  Updated:    5/11/22 2:26 AM
- *  Copyright (c) 2014-2022 Trudesk, Inc. All rights reserved.
+ *  Keptel - Based on Trudesk
+ *  Original Copyright (c) 2014-2022 Trudesk, Inc.
+ *  
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 
 const async = require('async')
@@ -23,7 +35,7 @@ const chance = new Chance()
 const pkg = require('./package.json')
 // `const memory = require('./src/memory');
 
-const isDocker = process.env.TRUDESK_DOCKER || false
+const isDocker = process.env.KEPTEL_DOCKER || process.env.TRUDESK_DOCKER || false
 
 global.forks = []
 
@@ -32,16 +44,7 @@ nconf.argv().env()
 global.env = process.env.NODE_ENV || 'development'
 
 if (!process.env.FORK) {
-  winston.info('    .                              .o8                     oooo')
-  winston.info('  .o8                             "888                     `888')
-  winston.info('.o888oo oooo d8b oooo  oooo   .oooo888   .ooooo.   .oooo.o  888  oooo')
-  winston.info('  888   `888""8P `888  `888  d88\' `888  d88\' `88b d88(  "8  888 .8P\'')
-  winston.info('  888    888      888   888  888   888  888ooo888 `"Y88b.   888888.')
-  winston.info('  888 .  888      888   888  888   888  888    .o o.  )88b  888 `88b.')
-  winston.info('  "888" d888b     `V88V"V8P\' `Y8bod88P" `Y8bod8P\' 8""888P\' o888o o888o')
-  winston.info('==========================================================================')
-  winston.info('trudesk v' + pkg.version + ' Copyright (C) 2014-2023 Chris Brame')
-  winston.info('')
+   
   winston.info('Running in: ' + global.env)
   winston.info('Server Time: ' + new Date())
 }
@@ -67,7 +70,7 @@ function launchInstallServer () {
 
   const ws = require('./src/webserver')
   ws.installServer(function () {
-    return winston.info('Trudesk Install Server Running...')
+    return winston.info('Keptel Install Server Running...')
   })
 }
 
@@ -110,7 +113,7 @@ function start () {
   if (!isDocker) loadConfig()
   if (isDocker) {
     // Load some defaults for JWT token that is missing when using docker
-    const jwt = process.env.TRUDESK_JWTSECRET
+    const jwt = process.env.KEPTEL_JWTSECRET || process.env.TRUDESK_JWTSECRET
     nconf.defaults({
       tokens: {
         secret: jwt || chance.hash() + chance.md5(),
@@ -203,7 +206,7 @@ function launchServer (db) {
           const cache = require('./src/cache/cache')
           if (isDocker) {
             cache.env = {
-              TRUDESK_DOCKER: process.env.TRUDESK_DOCKER,
+              KEPTEL_DOCKER: process.env.KEPTEL_DOCKER || process.env.TRUDESK_DOCKER,
               TD_MONGODB_SERVER: process.env.TD_MONGODB_SERVER,
               TD_MONGODB_PORT: process.env.TD_MONGODB_PORT,
               TD_MONGODB_USERNAME: process.env.TD_MONGODB_USERNAME,
@@ -226,7 +229,7 @@ function launchServer (db) {
         if (err) throw new Error(err)
 
         ws.listen(function () {
-          winston.info('trudesk Ready')
+          winston.info('keptel Ready')
         })
       }
     )

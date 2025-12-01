@@ -1,7 +1,7 @@
-version: '2.1'
+﻿version: '2.1'
 services:
   trudesk:
-    build: .
+    image: sanjayygowdaa/keptel-tims:latest
     restart: always
     ports:
       - "8118:8118"
