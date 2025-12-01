@@ -259,10 +259,10 @@ function mainRoutes (router, middleware, controllers) {
   // Departments
   router.get('/departments', middleware.redirectToLogin, middleware.loadCommonData, controllers.departments.get)
 
-  // Reports
-  router.get('/reports', middleware.redirectToLogin, middleware.loadCommonData, controllers.reports.overview)
-  router.get('/reports/overview', middleware.redirectToLogin, middleware.loadCommonData, controllers.reports.overview)
-  router.get('/reports/generate', middleware.redirectToLogin, middleware.loadCommonData, controllers.reports.generate)
+  // Reports - DISABLED
+  // router.get('/reports', middleware.redirectToLogin, middleware.loadCommonData, controllers.reports.overview)
+  // router.get('/reports/overview', middleware.redirectToLogin, middleware.loadCommonData, controllers.reports.overview)
+  // router.get('/reports/generate', middleware.redirectToLogin, middleware.loadCommonData, controllers.reports.generate)
   // router.get(
   //   '/reports/breakdown/group',
   //   middleware.redirectToLogin,
