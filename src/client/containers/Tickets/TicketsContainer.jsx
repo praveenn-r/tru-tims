@@ -294,25 +294,7 @@ class TicketsContainer extends React.Component {
                     )}
                   </Dropdown>
                 </DropdownTrigger>
-                <div className={'uk-float-right'}>
-                  <div
-                    id={'ticket-search-box'}
-                    className='search-box uk-float-left nb'
-                    style={{ marginTop: 8, paddingLeft: 0 }}
-                  >
-                    <input
-                      type='text'
-                      id='tickets_Search'
-                      placeholder={'Search'}
-                      className={'ticket-top-search'}
-                      value={this.searchTerm}
-                      onChange={e => this.onSearchTermChanged(e)}
-                      onFocus={e => this._onSearchFocus(e)}
-                    />
-                  </div>
-                </div>
               </div>
-              <SearchResults target={'#ticket-search-box'} ref={r => (this.searchContainer = r)} />
             </div>
           }
         />

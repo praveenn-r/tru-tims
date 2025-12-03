@@ -34,7 +34,7 @@ function performBackup (dbVersion, callback) {
       NODE_ENV: global.env,
       MONGOURI: database.connectionuri,
       PATH: process.env.PATH,
-      FILENAME: 'PREUPGRADE--trudesk-v' + dbVersion + '-' + moment().format('MMDDYYYY_HHmm') + '.zip'
+      FILENAME: 'PREUPGRADE--conzura-v' + dbVersion + '-' + moment().format('MMDDYYYY_HHmm') + '.zip'
     }
   })
   global.forks.push({ name: 'backup', fork: child })

@@ -125,7 +125,7 @@ function runBackup (callback) {
 
 ;(function () {
   CONNECTION_URI = process.env.MONGOURI
-  FILENAME = process.env.FILENAME || 'trudesk-v' + pkg.version + '-' + moment().format('MMDDYYYY_HHmm') + '.zip'
+  FILENAME = process.env.FILENAME || 'conzura-v' + pkg.version + '-' + moment().format('MMDDYYYY_HHmm') + '.zip'
 
   if (!CONNECTION_URI) return process.send({ error: { message: 'Invalid connection uri' } })
   const options = {
